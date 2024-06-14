@@ -1,0 +1,13 @@
+file_format: "1"
+id: palmtyl
+name: Palmtyl
+type: shield
+url: https://github.com/mjdi/zmk_palmtyl
+requires: [pro_micro]
+exposes:
+features:
+  - keys
+siblings:
+  - palmtyl_left
+  - palmtyl_right
+h
