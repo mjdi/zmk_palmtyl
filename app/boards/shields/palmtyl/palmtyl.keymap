@@ -31,9 +31,9 @@
 	&kp TAB	&kp Q &kp W &kp F &kp P &kp B                          &kp J &kp L &kp U &kp Y &kp MINUS &kp EQUAL
 	&kp ESC &kp A &kp R &kp S &kp T &kp G                          &kp M &kp N &kp E &kp I &kp O &kp SQT
 	&kp BSLH &kp Z &kp X &kp C &kp D &kp V                         &kp K &kp H &kp COMMA &kp DOT &kp FSLH &kp SEMI
-	&tog COLEMAKDH &kp HOME &kp END &kp LEFT &kp RIGHT &mkp MB3 &kp CAPS &kp UP &kp DOWN &kp LBKT &kp RBKT &tog COLEMAKDH
-	             &kp LGUI &kp LALT &kp BSPC &mkp MB2 &kp PG_UP &kp SPACE &kp RALT &kp RGUI
-		         &kp LCTRL &kp LSHFT &kp DEL &mkp MB1 &kp PG_DN &kp ENTER &kp RSHFT &kp RCTRL
+	&mkp MB3 &kp HOME &kp END &kp LEFT &kp RIGHT &kp CAPS &kp INS &kp UP &kp DOWN &kp LBKT &kp RBKT &tog COLEMAKDH
+	             &kp LGUI &kp LALT &kp BSPC &kp PG_UP &mkp MB2 &kp SPACE &kp RALT &kp RGUI
+		         &kp LCTRL &kp LSHFT &kp DEL &kp PG_DN &mkp MB1 &kp ENTER &kp RSHFT &kp RCTRL
 		>;
 	};
 
@@ -43,9 +43,9 @@
 	&kp TAB	&kp Q &kp W &kp F &kp P &kp B                          &kp J &kp L &kp U &kp Y &kp MINUS &kp EQUAL
 	&kp ESC &kp A &kp R &kp S &kp T &kp G                          &kp M &kp N &kp E &kp I &kp O &kp SQT
 	&kp BSLH &kp Z &kp X &kp C &kp D &kp V                         &kp K &kp H &kp COMMA &kp DOT &kp FSLH &kp SEMI
-	&tog COLEMAKDH &kp HOME &kp END &kp LEFT &kp RIGHT &mkp MB3 &kp CAPS &kp UP &kp DOWN &kp LBKT &kp RBKT &tog COLEMAKDH
-	             &kp LGUI &kp LALT &ltr SWAPHANDS BSPC &mkp MB2 &kp PG_UP  &kp SPACE &kp RALT &kp RGUI
-		         &kp LCTRL &kp LSHFT &ltr FUNCTIONS DEL &mkp MB1 &kp PG_DN  &ltr MEDIAKEYS ENTER &kp RSHFT &kp RCTRL
+	&tog COLEMAKDH &kp HOME &kp END &kp LEFT &kp RIGHT &mkp CAPS &kp INS &kp UP &kp DOWN &kp LBKT &kp RBKT &tog COLEMAKDH
+	             &kp LGUI &kp LALT &ltr SWAPHANDS BSPC &kp PG_UP &mkp MB2 &kp SPACE &kp RALT &kp RGUI
+		         &kp LCTRL &kp LSHFT &ltr FUNCTIONS DEL &kp PG_DN &mkp MB1 &ltr MEDIAKEYS ENTER &kp RSHFT &kp RCTRL
 		>;
 	};
 
@@ -79,9 +79,9 @@
 	&kp EQUAL &kp MINUS &kp Y &kp U &kp L &kp J &trans &trans &trans &trans &trans &trans
 	&kp SQT &kp O &kp I &kp E &kp N &kp M &trans &trans &trans &trans &trans &trans
 	&kp SEMI &kp FSLH &kp DOT &kp COMMA &kp H &kp K &trans &trans &trans &trans &trans &trans
-	&tog PALMCHORD &kp RBKT &kp LBKT &kp DOWN &kp UP &kp CAPS &trans &trans &trans &trans &trans &trans
-	        &kp RGUI &kp RALT &trans &mkp MB1 &trans &trans &trans &trans
-			&kp RCTRL &kp RSHFT &kp ENTER &mkp MB2 &trans &trans &trans &trans
+	&tog COLEMAKDH &kp RBKT &kp LBKT &kp DOWN &kp UP &kp CAPS &trans &trans &trans &trans &trans &trans
+	        &kp RGUI &kp RALT &trans &mkp MB2 &trans &trans &trans &trans
+			&kp RCTRL &kp RSHFT &kp ENTER &mkp MB1 &trans &trans &trans &trans
 		>;
 	};
 	};
