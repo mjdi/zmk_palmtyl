@@ -27,11 +27,11 @@
 		bindings = <
 	&kp BSLH &kp N1 &kp N2 &kp N3 &kp N4 &kp N5                    &kp N6 &kp N7 &kp N8 &kp N9 &kp N0 &kp GRAVE
 	&kp TAB	&kp Q &kp W &kp F &kp P &kp B                          &kp J &kp L &kp U &kp Y &kp MINUS &kp EQUAL
-	&kp ENTER &kp A &kp R &kp S &kp T &kp G                          &kp M &kp N &kp E &kp I &kp O &kp SQT
-	&kp ESC &kp Z &kp X &kp C &kp D &kp V                         &kp K &kp H &kp COMMA &kp DOT &kp FSLH &kp SEMI
-	&kp INS &kp CAPS &kp DEL &kp LEFT &kp RIGHT &kp LALT &kp RALT &kp UP &kp DOWN &kp LBKT &kp RBKT &tog GAMETHUMB
-	             &kp PSCRN &mkp MB3  &ltr FUNCTIONS BSPC &kp HOME &kp PG_UP &kp SPACE &mkp MB1 &mkp MB2
-		         &kp LCTRL &kp LSHFT &kp LGUI &kp END &kp PG_DN &kp RGUI &kp RSHFT &kp RCTRL
+	&kp ESC &kp A &kp R &kp S &kp T &kp G                          &kp M &kp N &kp E &kp I &kp O &kp SQT
+	&kp PG_UP &kp Z &kp X &kp C &kp D &kp V                         &kp K &kp H &kp COMMA &kp DOT &kp FSLH &kp SEMI
+	&kp PG_DN &kp HOME &kp END &kp LEFT &kp RIGHT &kp CAPS &kp INS &kp UP &kp DOWN &kp LBKT &kp RBKT &tog GAMETHUMB
+	             &kp PSCRN &mkp MB3  &kp BSPC &kp LALT &kp LALT &kp SPACE &mkp MB1 &mkp MB2
+		         &kp LCTRL &kp LSHFT &ltr FUNCTIONS DEL &kp LGUI &kp LGUI &kp ENTER &kp LSHFT &kp LCTRL
 		>;
 	};
 
@@ -42,8 +42,8 @@
 	&trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans
 	&trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans
 	&trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans
-	             &trans &trans &kp BSPC &trans &trans &trans &trans &trans
-				 &trans &trans &trans &trans &trans &trans &trans &trans
+	             &trans &trans &trans &trans &kp RALT &trans &trans &trans
+				 &trans &trans &kp DEL &trans &kp RGUI &trans &kp RSHFT &kp RCTRL
 		>;
 	};
 
@@ -53,7 +53,7 @@
 	&kp C_BRI_UP &kp F12 &kp F7 &kp F8 &kp F9 &kp C_VOL_UP &trans &trans &trans &trans &trans &trans
 	&kp C_BRI_DN &kp F11 &kp F4 &kp F5 &kp F6 &kp C_VOL_DN &trans &trans &trans &trans &trans &trans
 	&bt BT_CLR &kp F10 &kp F1 &kp F2 &kp F3 &kp C_MUTE &trans &trans &trans &trans &trans &trans
-	&bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2 &bt BT_SEL 3 &bt BT_SEL 4 &trans &trans &trans &trans &trans &trans
+	&bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2 &bt BT_SEL 3 &bt BT_SEL 4 &trans &trans &trans &trans &trans &trans &trans
 	             &trans &trans &trans &trans &trans &trans &trans &trans
 				 &trans &trans &trans &trans &trans &trans &trans &trans
 		>;
