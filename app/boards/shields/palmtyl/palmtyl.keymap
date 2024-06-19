@@ -29,8 +29,8 @@
 	&kp TAB	&kp Q &kp W &kp F &kp P &kp B                          &kp J &kp L &kp U &kp Y &kp MINUS &kp EQUAL
 	&kp ESC &kp A &kp R &kp S &kp T &kp G                          &kp M &kp N &kp E &kp I &kp O &kp SQT
 	&kp PG_UP &kp Z &kp X &kp C &kp D &kp V                         &kp K &kp H &kp COMMA &kp DOT &kp FSLH &kp SEMI
-	&kp PG_DN &kp HOME &kp END &kp LEFT &kp RIGHT &kp CAPS &kp INS &kp UP &kp DOWN &kp LBKT &kp RBKT &tog GAMETHUMB
-	             &kp PSCRN &mkp MB3  &kp BSPC &kp LALT &kp LALT &kp SPACE &mkp MB1 &mkp MB2
+	&kp PG_DN &kp HOME &kp END &kp LEFT &kp RIGHT &kp CAPS &kp INS &kp UP &kp DOWN &kp LBKT &kp RBKT &mkp MB2
+	             &tog GAMETHUMB &kp PSCRN &kp BSPC &kp LALT &kp LALT &kp SPACE &mkp MB1 &mkp MB3
 		         &kp LCTRL &kp LSHFT &ltr FUNCTIONS DEL &kp LGUI &kp LGUI &kp ENTER &kp LSHFT &kp LCTRL
 		>;
 	};
