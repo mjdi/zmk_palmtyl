@@ -27,15 +27,13 @@
 		bindings = <
 	&kp HOME &kp N1 &kp N2 &kp N3 &kp N4 &kp N5                    &kp N6 &kp N7 &kp N8 &kp N9 &kp N0 &tog GAMETHUMB
 	&kp END &kp Q &kp W &kp F &kp P &kp B                          &kp J &kp L &kp U &kp Y &kp SQT &kp SEMI
-	&kp MINUS &kp A &kp R &kp S &kp T &kp G                         &kp M &kp N &kp E &kp I &kp O &kp EQUAL
+	&kp EQUAL &kp A &kp R &kp S &kp T &kp G                         &kp M &kp N &kp E &kp I &kp O &kp MINUS
 	&kp GRAVE &kp Z &kp X &kp C &kp D &kp V                         &kp K &kp H &kp COMMA &kp DOT &kp FSLH &kp BSLH
 	&mkp MB2 &kp PG_UP &kp PG_DN &kp LEFT &kp RIGHT &kp TAB &kp ESC &kp UP &kp DOWN &kp LBKT &kp RBKT &mkp MB2
 	             &mkp MB3 &mkp MB1 &kp BSPC &kp LALT &kp LALT &kp SPACE &mkp MB1 &mkp MB3
 		         &kp LCTRL &kp LSHFT &ltr FUNCTIONS DEL &kp LGUI &kp LGUI &kp ENTER &kp LSHFT &kp LCTRL
 		>;
 	};
-
-
 
 	gamethumb_layer {
 		bindings = <
