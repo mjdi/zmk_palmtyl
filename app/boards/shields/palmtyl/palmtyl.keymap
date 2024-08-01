@@ -6,18 +6,84 @@
 #define BASELAYER 0
 #define GAMETHUMB 1
 #define FUNCTIONS 2
+#define COMBO_TERM_LONG 100  
+#define COMBO(NAME, BINDINGS, KEYPOS, MS) \
+    combo_##NAME { \
+        timeout-ms = <MS>; \
+        key-positions = <KEYPOS>; \
+        bindings = <BINDINGS>; \
+    };
+
+#define VARIABLE_MACRO
+
+#define VARIABLE_HOLD_TAP_TAPPING_TERM_MS 500
+#define VARIABLE_HOLD_QUICK_TAP_MS 400
+#define VARIABLE_HOLD_TAP(REGISTER) \
+	v##REGISTER##ht: variable_vim_register_##REGISTER##_hold_tap { \
+		compatible = "zmk,behavior-hold-tap"; \
+		#binding-cells = <2>; \
+		flavor = "tap-preferred"; \
+		tapping-term-ms = <VARIABLE_HOLD_TAP_TAPPING_TERM_MS>; \
+		quick-tap-ms = <VARIABLE_HOLD_QUICK_TAP_MS>; \
+		bindings = <&pvrmop &kp>; \
+	};
 
 / {
+	macros {
+        pvrmop: paste_vim_register_macro {
+            compatible = "zmk,behavior-macro-one-param";
+            #binding-cells = <1>; // Must be 1
+            bindings
+				= <&macro_press &kp LCTRL>
+				, <&macro_tap &kp R>
+				, <&macro_release &kp LCTRL>
+				, <&macro_param_1to1>
+				, <&macro_tap &kp MACRO_PLACEHOLDER>
+				;
+        };
+	};
+	
 	behaviors {
 		ltr: layer_tap_repeat {
 			compatible = "zmk,behavior-hold-tap";
-			label = "LAYER_TAP_REPEAT";
 			#binding-cells = <2>;
 			flavor = "tap-preferred";
 			tapping-term-ms = <150>;
 			quick-tap-ms = <400>;
-			bindings = <&mo>, <&kp>, <&mkp>;
+			bindings = <&mo>, <&kp>;
 		};
+		VARIABLE_HOLD_TAP(Q)
+		VARIABLE_HOLD_TAP(W)
+		VARIABLE_HOLD_TAP(F)
+		VARIABLE_HOLD_TAP(P)
+		VARIABLE_HOLD_TAP(B)
+		VARIABLE_HOLD_TAP(J)
+		VARIABLE_HOLD_TAP(L)
+		VARIABLE_HOLD_TAP(U)
+		VARIABLE_HOLD_TAP(Y)
+		VARIABLE_HOLD_TAP(A)
+		VARIABLE_HOLD_TAP(R)
+		VARIABLE_HOLD_TAP(S) 
+		VARIABLE_HOLD_TAP(T) 
+		VARIABLE_HOLD_TAP(G)  
+		VARIABLE_HOLD_TAP(M)
+		VARIABLE_HOLD_TAP(N)
+		VARIABLE_HOLD_TAP(E)
+		VARIABLE_HOLD_TAP(I)
+		VARIABLE_HOLD_TAP(O)
+		VARIABLE_HOLD_TAP(Z)
+		VARIABLE_HOLD_TAP(X)
+		VARIABLE_HOLD_TAP(C)
+		VARIABLE_HOLD_TAP(D)
+		VARIABLE_HOLD_TAP(V) 
+		VARIABLE_HOLD_TAP(K) 
+		VARIABLE_HOLD_TAP(H)
+	};
+
+    combos {
+        compatible = "zmk,combos";
+		COMBO(left_paren, &kp LPAR, 62 70, COMBO_TERM_LONG)
+		COMBO(underscore, &kp UNDERSCORE, 65 73, COMBO_TERM_LONG)
 	};
 
     keymap {
@@ -25,25 +91,25 @@
 
         baselayer_layer {
 		bindings = <
-	&kp GRAVE &kp N1 &kp N2 &kp N3 &kp N4 &kp N5                    &kp N6 &kp N7 &kp N8 &kp N9 &kp N0 &tog GAMETHUMB
-	&kp BSLH &kp Q &kp W &kp F &kp P &kp B                          &kp J &kp L &kp U &kp Y &kp SQT &kp SEMI
-	&kp EQUAL &kp A &kp R &kp S &kp T &kp G 		 	            &kp M &kp N &kp E &kp I &kp O &kp MINUS
-	&kp LA(TAB) &kp Z &kp X &kp C &kp D &kp V     	                &kp K &kp H &kp COMMA &kp DOT &kp FSLH &kp LG(LC(RIGHT))
-	&kp PGUP &kp HOME &kp END &kp LEFT &kp RIGHT &kp TAB &kp ESC &kp UP &kp DOWN &kp LBKT &kp RBKT &kp PGDN
-	             &kp LGUI &kp LALT &kp BSPC &kp CAPS &kp LG(LC(LEFT)) &kp SPACE &kp RALT &kp RGUI
-		         &kp LCTRL &kp LSHFT &ltr FUNCTIONS DEL &kp PSCRN &kp LG(TAB) &kp ENTER &kp RSHFT &kp RCTRL
+	&kp LBKT &kp N1 &kp N2 &kp N3 &kp N4 &kp N5 &kp N6 &kp N7 &kp N8 &kp N9 &kp N0 &kp RBKT 
+	&kp EQUAL &vQht Q Q &vWht W W &vFht F F &vPht P P &vBht B B &vJht J J &vLht L L &vUht U U &vYht Y Y &kp SEMI &kp MINUS
+	&kp ESC &vAht A A &vRht R R &vSht S S &vTht T T &vGht G G &vMht M M &vNht N N &vEht E E &vIht I I &vOht O O &kp SQT
+	&kp BSLH &vZht Z Z &vXht X X &vCht C C &vDht D D &vVht V V &vKht K K &vHht H H &kp COMMA &kp DOT &kp FSLH &kp GRAVE 
+	&tog GAMETHUMB &kp HOME &kp END &kp LEFT &kp RIGHT &kp TAB &key_repeat &kp UP &kp DOWN &kp PGUP &kp PGDN &tog GAMETHUMB 
+	             &kp LGUI &kp LALT &ltr FUNCTIONS BSPC &kp LG(LC(LEFT)) &kp LG(LC(RIGHT)) &kp SPACE &kp RALT &kp RGUI
+		         &kp LCTRL &kp LSHFT &kp DEL &kp PSCRN &kp CAPS &kp ENTER &kp RSHFT &kp RCTRL
 		>;
 	};
 
 	gamethumb_layer {
 		bindings = <
 	&trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans
+	&trans &kp Q  &kp W  &kp F  &kp P  &kp B  &kp J  &kp L  &kp U  &kp Y  &trans &trans
+	&trans &kp A  &kp R  &kp S  &kp T  &kp G  &kp M  &kp N  &kp E  &kp I  &kp O  &trans
+	&trans &kp Z  &kp X  &kp C  &kp D  &kp V  &kp K  &kp H  &trans &trans &trans &trans
 	&trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans
-	&trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans
-	&trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans
-	&trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans
-	             &trans &trans &trans &trans &trans &trans &trans &trans
-				 &trans &trans &kp DEL &trans &trans &trans &trans &trans
+	             &trans &trans &kp DEL &trans &trans &trans &trans &trans
+				 &trans &trans &kp CAPS &trans &trans &trans &trans &trans
 		>;
 	};
 
