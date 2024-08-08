@@ -14,7 +14,30 @@
         bindings = <BINDINGS>; \
     };
 
-#define VARIABLE_MACRO
+#define MACRO_VIM_RELATIVE_LINE_1_DIGIT_NUMBER_UP(ONES) \
+	vrn##ONES##um: vim_rnu_##ONES##_up_macro { \
+		compatible = "zmk,behavior-macro"; \
+		#binding-cells = <0>; \
+		bindings = <&kp N##ONES &kp UP>; \
+	};  
+#define MACRO_VIM_RELATIVE_LINE_2_DIGIT_NUMBER_UP(TENS, ONES) \
+	vrn##TENS##ONES##um: vim_rnu_##TENS##ONES##_up_macro { \
+		compatible = "zmk,behavior-macro"; \
+		#binding-cells = <0>; \
+		bindings = <&kp N##TENS &kp N##ONES &kp UP>; \
+	};  
+#define MACRO_VIM_RELATIVE_LINE_1_DIGIT_NUMBER_DOWN(ONES) \
+	vrn##ONES##dm: vim_rnu_##ONES##_down_macro { \
+		compatible = "zmk,behavior-macro"; \
+		#binding-cells = <0>; \
+		bindings = <&kp N##ONES &kp DOWN>; \
+	};  
+#define MACRO_VIM_RELATIVE_LINE_2_DIGIT_NUMBER_DOWN(TENS, ONES) \
+	vrn##TENS##ONES##dm: vim_rnu_##TENS##ONES##_down_macro { \
+		compatible = "zmk,behavior-macro"; \
+		#binding-cells = <0>; \
+		bindings = <&kp N##TENS &kp N##ONES &kp DOWN>; \
+	};  
 
 #define VARIABLE_HOLD_TAP_TAPPING_TERM_MS 500
 #define VARIABLE_HOLD_QUICK_TAP_MS 400
@@ -30,6 +53,138 @@
 
 / {
 	macros {
+		vcm: vim_column_macro {
+			compatible = "zmk,behavior-macro-one-param";
+			#binding-cells = <1>; // Must be 1
+			bindings 
+				= <&macro_param_1to1>
+				, <&kp MACRO_PLACEHOLDER &kp N0 &kp PIPE>
+				;
+		};
+		vcm100: vim_column_100_macro {
+			compatible = "zmk,behavior-macro";
+			#binding-cells = <0>;
+			bindings = <&kp N1 &kp N0 &kp N0 &kp PIPE>;
+		};
+		MACRO_VIM_RELATIVE_LINE_1_DIGIT_NUMBER_UP(1)
+		MACRO_VIM_RELATIVE_LINE_1_DIGIT_NUMBER_UP(2)
+		MACRO_VIM_RELATIVE_LINE_1_DIGIT_NUMBER_UP(3)
+		MACRO_VIM_RELATIVE_LINE_1_DIGIT_NUMBER_UP(4)
+		MACRO_VIM_RELATIVE_LINE_1_DIGIT_NUMBER_UP(5)
+		MACRO_VIM_RELATIVE_LINE_1_DIGIT_NUMBER_UP(6)
+		MACRO_VIM_RELATIVE_LINE_1_DIGIT_NUMBER_UP(7)
+		MACRO_VIM_RELATIVE_LINE_1_DIGIT_NUMBER_UP(8)
+		MACRO_VIM_RELATIVE_LINE_1_DIGIT_NUMBER_UP(9)
+		MACRO_VIM_RELATIVE_LINE_2_DIGIT_NUMBER_UP(1,0)
+		MACRO_VIM_RELATIVE_LINE_2_DIGIT_NUMBER_UP(1,1)
+		MACRO_VIM_RELATIVE_LINE_2_DIGIT_NUMBER_UP(1,2)
+		MACRO_VIM_RELATIVE_LINE_2_DIGIT_NUMBER_UP(1,3)
+		MACRO_VIM_RELATIVE_LINE_2_DIGIT_NUMBER_UP(1,4)
+		MACRO_VIM_RELATIVE_LINE_2_DIGIT_NUMBER_UP(1,5)
+		MACRO_VIM_RELATIVE_LINE_2_DIGIT_NUMBER_UP(1,6)
+		MACRO_VIM_RELATIVE_LINE_2_DIGIT_NUMBER_UP(1,7)
+		MACRO_VIM_RELATIVE_LINE_2_DIGIT_NUMBER_UP(1,8)
+		MACRO_VIM_RELATIVE_LINE_2_DIGIT_NUMBER_UP(1,9)
+		MACRO_VIM_RELATIVE_LINE_2_DIGIT_NUMBER_UP(2,0)
+		MACRO_VIM_RELATIVE_LINE_2_DIGIT_NUMBER_UP(2,1)
+		MACRO_VIM_RELATIVE_LINE_2_DIGIT_NUMBER_UP(2,2)
+		MACRO_VIM_RELATIVE_LINE_2_DIGIT_NUMBER_UP(2,3)
+		MACRO_VIM_RELATIVE_LINE_2_DIGIT_NUMBER_UP(2,4)
+		MACRO_VIM_RELATIVE_LINE_2_DIGIT_NUMBER_UP(2,5)
+		MACRO_VIM_RELATIVE_LINE_2_DIGIT_NUMBER_UP(2,6)
+		MACRO_VIM_RELATIVE_LINE_2_DIGIT_NUMBER_UP(2,7)
+		MACRO_VIM_RELATIVE_LINE_2_DIGIT_NUMBER_UP(2,8)
+		MACRO_VIM_RELATIVE_LINE_2_DIGIT_NUMBER_UP(2,9)
+		MACRO_VIM_RELATIVE_LINE_2_DIGIT_NUMBER_UP(3,0)
+		MACRO_VIM_RELATIVE_LINE_2_DIGIT_NUMBER_UP(3,1)
+		MACRO_VIM_RELATIVE_LINE_2_DIGIT_NUMBER_UP(3,2)
+		MACRO_VIM_RELATIVE_LINE_2_DIGIT_NUMBER_UP(3,3)
+		MACRO_VIM_RELATIVE_LINE_2_DIGIT_NUMBER_UP(3,4)
+		MACRO_VIM_RELATIVE_LINE_2_DIGIT_NUMBER_UP(3,5)
+		MACRO_VIM_RELATIVE_LINE_2_DIGIT_NUMBER_UP(3,6)
+		MACRO_VIM_RELATIVE_LINE_2_DIGIT_NUMBER_UP(3,7)
+		MACRO_VIM_RELATIVE_LINE_2_DIGIT_NUMBER_UP(3,8)
+		MACRO_VIM_RELATIVE_LINE_2_DIGIT_NUMBER_UP(3,9)
+		MACRO_VIM_RELATIVE_LINE_2_DIGIT_NUMBER_UP(4,0)
+		MACRO_VIM_RELATIVE_LINE_2_DIGIT_NUMBER_UP(4,1)
+		MACRO_VIM_RELATIVE_LINE_2_DIGIT_NUMBER_UP(4,2)
+		MACRO_VIM_RELATIVE_LINE_2_DIGIT_NUMBER_UP(4,3)
+		MACRO_VIM_RELATIVE_LINE_2_DIGIT_NUMBER_UP(4,4)
+		MACRO_VIM_RELATIVE_LINE_2_DIGIT_NUMBER_UP(4,5)
+		MACRO_VIM_RELATIVE_LINE_2_DIGIT_NUMBER_UP(4,6)
+		MACRO_VIM_RELATIVE_LINE_2_DIGIT_NUMBER_UP(4,7)
+		MACRO_VIM_RELATIVE_LINE_2_DIGIT_NUMBER_UP(4,8)
+		MACRO_VIM_RELATIVE_LINE_2_DIGIT_NUMBER_UP(4,9)
+		MACRO_VIM_RELATIVE_LINE_1_DIGIT_NUMBER_DOWN(1)
+		MACRO_VIM_RELATIVE_LINE_1_DIGIT_NUMBER_DOWN(2)
+		MACRO_VIM_RELATIVE_LINE_1_DIGIT_NUMBER_DOWN(3)
+		MACRO_VIM_RELATIVE_LINE_1_DIGIT_NUMBER_DOWN(4)
+		MACRO_VIM_RELATIVE_LINE_1_DIGIT_NUMBER_DOWN(5)
+		MACRO_VIM_RELATIVE_LINE_1_DIGIT_NUMBER_DOWN(6)
+		MACRO_VIM_RELATIVE_LINE_1_DIGIT_NUMBER_DOWN(7)
+		MACRO_VIM_RELATIVE_LINE_1_DIGIT_NUMBER_DOWN(8)
+		MACRO_VIM_RELATIVE_LINE_1_DIGIT_NUMBER_DOWN(9)
+		MACRO_VIM_RELATIVE_LINE_2_DIGIT_NUMBER_DOWN(1,0)
+		MACRO_VIM_RELATIVE_LINE_2_DIGIT_NUMBER_DOWN(1,1)
+		MACRO_VIM_RELATIVE_LINE_2_DIGIT_NUMBER_DOWN(1,2)
+		MACRO_VIM_RELATIVE_LINE_2_DIGIT_NUMBER_DOWN(1,3)
+		MACRO_VIM_RELATIVE_LINE_2_DIGIT_NUMBER_DOWN(1,4)
+		MACRO_VIM_RELATIVE_LINE_2_DIGIT_NUMBER_DOWN(1,5)
+		MACRO_VIM_RELATIVE_LINE_2_DIGIT_NUMBER_DOWN(1,6)
+		MACRO_VIM_RELATIVE_LINE_2_DIGIT_NUMBER_DOWN(1,7)
+		MACRO_VIM_RELATIVE_LINE_2_DIGIT_NUMBER_DOWN(1,8)
+		MACRO_VIM_RELATIVE_LINE_2_DIGIT_NUMBER_DOWN(1,9)
+		MACRO_VIM_RELATIVE_LINE_2_DIGIT_NUMBER_DOWN(2,0)
+		MACRO_VIM_RELATIVE_LINE_2_DIGIT_NUMBER_DOWN(2,1)
+		MACRO_VIM_RELATIVE_LINE_2_DIGIT_NUMBER_DOWN(2,2)
+		MACRO_VIM_RELATIVE_LINE_2_DIGIT_NUMBER_DOWN(2,3)
+		MACRO_VIM_RELATIVE_LINE_2_DIGIT_NUMBER_DOWN(2,4)
+		MACRO_VIM_RELATIVE_LINE_2_DIGIT_NUMBER_DOWN(2,5)
+		MACRO_VIM_RELATIVE_LINE_2_DIGIT_NUMBER_DOWN(2,6)
+		MACRO_VIM_RELATIVE_LINE_2_DIGIT_NUMBER_DOWN(2,7)
+		MACRO_VIM_RELATIVE_LINE_2_DIGIT_NUMBER_DOWN(2,8)
+		MACRO_VIM_RELATIVE_LINE_2_DIGIT_NUMBER_DOWN(2,9)
+		MACRO_VIM_RELATIVE_LINE_2_DIGIT_NUMBER_DOWN(3,0)
+		MACRO_VIM_RELATIVE_LINE_2_DIGIT_NUMBER_DOWN(3,1)
+		MACRO_VIM_RELATIVE_LINE_2_DIGIT_NUMBER_DOWN(3,2)
+		MACRO_VIM_RELATIVE_LINE_2_DIGIT_NUMBER_DOWN(3,3)
+		MACRO_VIM_RELATIVE_LINE_2_DIGIT_NUMBER_DOWN(3,4)
+		MACRO_VIM_RELATIVE_LINE_2_DIGIT_NUMBER_DOWN(3,5)
+		MACRO_VIM_RELATIVE_LINE_2_DIGIT_NUMBER_DOWN(3,6)
+		MACRO_VIM_RELATIVE_LINE_2_DIGIT_NUMBER_DOWN(3,7)
+		MACRO_VIM_RELATIVE_LINE_2_DIGIT_NUMBER_DOWN(3,8)
+		MACRO_VIM_RELATIVE_LINE_2_DIGIT_NUMBER_DOWN(3,9)
+		MACRO_VIM_RELATIVE_LINE_2_DIGIT_NUMBER_DOWN(4,0)
+		MACRO_VIM_RELATIVE_LINE_2_DIGIT_NUMBER_DOWN(4,1)
+		MACRO_VIM_RELATIVE_LINE_2_DIGIT_NUMBER_DOWN(4,2)
+		MACRO_VIM_RELATIVE_LINE_2_DIGIT_NUMBER_DOWN(4,3)
+		MACRO_VIM_RELATIVE_LINE_2_DIGIT_NUMBER_DOWN(4,4)
+		MACRO_VIM_RELATIVE_LINE_2_DIGIT_NUMBER_DOWN(4,5)
+		MACRO_VIM_RELATIVE_LINE_2_DIGIT_NUMBER_DOWN(4,6)
+		MACRO_VIM_RELATIVE_LINE_2_DIGIT_NUMBER_DOWN(4,7)
+		MACRO_VIM_RELATIVE_LINE_2_DIGIT_NUMBER_DOWN(4,8)
+		MACRO_VIM_RELATIVE_LINE_2_DIGIT_NUMBER_DOWN(4,9)
+		lvspsbs: leet_vscode_copy_paste_side_by_side_macro {
+			compatible = "zmk,behavior-macro";
+			#binding-cells = <0>;
+			bindings 
+				= <&macro_wait_time 50>
+				, <&kp ESC &kp G &kp G &kp LS(V) &kp LS(G) &kp DQT &kp PLUS &kp Y>
+				, <&macro_wait_time 250>
+				, <&kp LA(TAB) &kp ESC>
+				, <&macro_wait_time 50>
+				, <&kp G &kp G &kp LS(V) &kp LS(G) &kp DQT &kp PLUS &kp P>
+				;
+		};		
+		swivrmop: store_word_in_vim_register_macro {
+			compatible = "zmk,behavior-macro-one-param";
+			#binding-cells = <1>; // Must be 1
+			bindings 
+				= <&kp ESC &kp LEFT &kp LEFT &kp E &kp V &kp B &kp DQT>
+				, <&macro_param_1to1>
+			 	, <&kp MACRO_PLACEHOLDER &kp Y &kp E &kp A>
+				;
+		};		
         pvrmop: paste_vim_register_macro {
             compatible = "zmk,behavior-macro-one-param";
             #binding-cells = <1>; // Must be 1
@@ -41,6 +196,11 @@
 				, <&macro_tap &kp MACRO_PLACEHOLDER>
 				;
         };
+		vwam: vim_write_all_macro {
+			compatible = "zmk,behavior-macro";
+			#binding-cells = <0>;
+			bindings = <&kp ESC &kp COLON &kp W &kp A &kp ENTER>;
+		};
 	};
 	
 	behaviors {
@@ -51,6 +211,14 @@
 			tapping-term-ms = <150>;
 			quick-tap-ms = <400>;
 			bindings = <&mo>, <&kp>;
+		};
+		htr: mod_tap_repeat {
+			compatible = "zmk,behavior-hold-tap";
+			#binding-cells = <2>;
+			flavor = "tap-preferred";
+			tapping-term-ms = <150>;
+			quick-tap-ms = <400>;
+			bindings = <&kp>, <&kp>;
 		};
 		VARIABLE_HOLD_TAP(Q)
 		VARIABLE_HOLD_TAP(W)
@@ -82,8 +250,145 @@
 
     combos {
         compatible = "zmk,combos";
-		COMBO(left_paren, &kp LPAR, 62 70, COMBO_TERM_LONG)
-		COMBO(underscore, &kp UNDERSCORE, 65 73, COMBO_TERM_LONG)
+		COMBO(leet_vscode_copy_paste_side_by_side, &lvspsbs, 12 70, COMBO_TERM_LONG) // equals + gui
+   		COMBO(vim_write_all_macro, &vwam, 22 70, COMBO_TERM_LONG) // colon + gui
+  		COMBO(store_word_in_vim_register_Q, &swivrmop Q, 13 70, COMBO_TERM_LONG) // alpha + gui
+  		COMBO(store_word_in_vim_register_W, &swivrmop W, 14 70, COMBO_TERM_LONG)
+  		COMBO(store_word_in_vim_register_F, &swivrmop F, 15 70, COMBO_TERM_LONG)
+  		COMBO(store_word_in_vim_register_P, &swivrmop P, 16 70, COMBO_TERM_LONG)
+  		COMBO(store_word_in_vim_register_B, &swivrmop B, 17 70, COMBO_TERM_LONG)
+  		COMBO(store_word_in_vim_register_J, &swivrmop J, 18 70, COMBO_TERM_LONG)
+  		COMBO(store_word_in_vim_register_L, &swivrmop L, 19 70, COMBO_TERM_LONG)
+  		COMBO(store_word_in_vim_register_U, &swivrmop U, 20 70, COMBO_TERM_LONG)
+  		COMBO(store_word_in_vim_register_Y, &swivrmop Y, 21 70, COMBO_TERM_LONG)
+  		COMBO(store_word_in_vim_register_A, &swivrmop A, 25 70, COMBO_TERM_LONG)
+  		COMBO(store_word_in_vim_register_R, &swivrmop R, 26 70, COMBO_TERM_LONG)
+  		COMBO(store_word_in_vim_register_S, &swivrmop S, 27 70, COMBO_TERM_LONG)
+  		COMBO(store_word_in_vim_register_T, &swivrmop T, 28 70, COMBO_TERM_LONG)
+  		COMBO(store_word_in_vim_register_G, &swivrmop G, 29 70, COMBO_TERM_LONG)
+  		COMBO(store_word_in_vim_register_M, &swivrmop M, 30 70, COMBO_TERM_LONG)
+  		COMBO(store_word_in_vim_register_N, &swivrmop N, 31 70, COMBO_TERM_LONG)
+  		COMBO(store_word_in_vim_register_E, &swivrmop E, 32 70, COMBO_TERM_LONG)
+  		COMBO(store_word_in_vim_register_I, &swivrmop I, 33 70, COMBO_TERM_LONG)
+  		COMBO(store_word_in_vim_register_O, &swivrmop O, 34 70, COMBO_TERM_LONG)
+  		COMBO(store_word_in_vim_register_Z, &swivrmop Z, 37 70, COMBO_TERM_LONG)
+  		COMBO(store_word_in_vim_register_X, &swivrmop X, 38 70, COMBO_TERM_LONG)
+  		COMBO(store_word_in_vim_register_C, &swivrmop C, 39 70, COMBO_TERM_LONG)
+  		COMBO(store_word_in_vim_register_D, &swivrmop D, 40 70, COMBO_TERM_LONG)
+  		COMBO(store_word_in_vim_register_V, &swivrmop V, 41 70, COMBO_TERM_LONG)
+  		COMBO(store_word_in_vim_register_K, &swivrmop K, 42 70, COMBO_TERM_LONG)
+  		COMBO(store_word_in_vim_register_H, &swivrmop H, 43 70, COMBO_TERM_LONG)
+		COMBO(capital_M, &kp LS(M), 55 56, COMBO_TERM_LONG)
+		// a 10, r 20, x 30, w 40, c1d2v3s4t5g6f7p8b9Bksp0
+		COMBO(relative_line_number_1_up, &vrn1um, 39 55, COMBO_TERM_LONG)
+		COMBO(relative_line_number_2_up, &vrn2um, 40 55, COMBO_TERM_LONG)
+		COMBO(relative_line_number_3_up, &vrn3um, 41 55, COMBO_TERM_LONG)
+		COMBO(relative_line_number_4_up, &vrn4um, 27 55, COMBO_TERM_LONG)
+		COMBO(relative_line_number_5_up, &vrn5um, 28 55, COMBO_TERM_LONG)
+		COMBO(relative_line_number_6_up, &vrn6um, 29 55, COMBO_TERM_LONG)
+		COMBO(relative_line_number_7_up, &vrn7um, 15 55, COMBO_TERM_LONG)
+		COMBO(relative_line_number_8_up, &vrn8um, 16 55, COMBO_TERM_LONG)
+		COMBO(relative_line_number_9_up, &vrn9um, 17 55, COMBO_TERM_LONG)
+		COMBO(relative_line_number_10_up, &vrn10um, 25 55 62, COMBO_TERM_LONG)
+		COMBO(relative_line_number_11_up, &vrn11um, 25 39 55, COMBO_TERM_LONG)
+		COMBO(relative_line_number_12_up, &vrn12um, 25 40 55, COMBO_TERM_LONG)
+		COMBO(relative_line_number_13_up, &vrn13um, 25 41 55, COMBO_TERM_LONG)
+		COMBO(relative_line_number_14_up, &vrn14um, 25 27 55, COMBO_TERM_LONG)
+		COMBO(relative_line_number_15_up, &vrn15um, 25 28 55, COMBO_TERM_LONG)
+		COMBO(relative_line_number_16_up, &vrn16um, 25 29 55, COMBO_TERM_LONG)
+		COMBO(relative_line_number_17_up, &vrn17um, 25 15 55, COMBO_TERM_LONG)
+		COMBO(relative_line_number_18_up, &vrn18um, 25 16 55, COMBO_TERM_LONG)
+		COMBO(relative_line_number_19_up, &vrn19um, 25 17 55, COMBO_TERM_LONG)
+   		COMBO(relative_line_number_20_up, &vrn20um, 26 55 62, COMBO_TERM_LONG)
+		COMBO(relative_line_number_21_up, &vrn21um, 26 39 55, COMBO_TERM_LONG)
+		COMBO(relative_line_number_22_up, &vrn22um, 26 40 55, COMBO_TERM_LONG)
+		COMBO(relative_line_number_23_up, &vrn23um, 26 41 55, COMBO_TERM_LONG)
+		COMBO(relative_line_number_24_up, &vrn24um, 26 27 55, COMBO_TERM_LONG)
+		COMBO(relative_line_number_25_up, &vrn25um, 26 28 55, COMBO_TERM_LONG)
+		COMBO(relative_line_number_26_up, &vrn26um, 26 29 55, COMBO_TERM_LONG)
+		COMBO(relative_line_number_27_up, &vrn27um, 26 15 55, COMBO_TERM_LONG)
+		COMBO(relative_line_number_28_up, &vrn28um, 26 16 55, COMBO_TERM_LONG)
+		COMBO(relative_line_number_29_up, &vrn29um, 26 17 55, COMBO_TERM_LONG)
+		COMBO(relative_line_number_30_up, &vrn30um, 38 55 62, COMBO_TERM_LONG)
+		COMBO(relative_line_number_31_up, &vrn31um, 38 39 55, COMBO_TERM_LONG)
+		COMBO(relative_line_number_32_up, &vrn32um, 38 40 55, COMBO_TERM_LONG)
+		COMBO(relative_line_number_33_up, &vrn33um, 38 41 55, COMBO_TERM_LONG)
+		COMBO(relative_line_number_34_up, &vrn34um, 38 27 55, COMBO_TERM_LONG)
+		COMBO(relative_line_number_35_up, &vrn35um, 38 28 55, COMBO_TERM_LONG)
+		COMBO(relative_line_number_36_up, &vrn36um, 38 29 55, COMBO_TERM_LONG)
+		COMBO(relative_line_number_37_up, &vrn37um, 38 15 55, COMBO_TERM_LONG)
+		COMBO(relative_line_number_38_up, &vrn38um, 38 16 55, COMBO_TERM_LONG)
+		COMBO(relative_line_number_39_up, &vrn39um, 38 17 55, COMBO_TERM_LONG)
+		COMBO(relative_line_number_40_up, &vrn40um, 14 55 62, COMBO_TERM_LONG)
+		COMBO(relative_line_number_41_up, &vrn41um, 14 39 55, COMBO_TERM_LONG)
+		COMBO(relative_line_number_42_up, &vrn42um, 14 40 55, COMBO_TERM_LONG)
+		COMBO(relative_line_number_43_up, &vrn43um, 14 41 55, COMBO_TERM_LONG)
+		COMBO(relative_line_number_44_up, &vrn44um, 14 27 55, COMBO_TERM_LONG)
+		COMBO(relative_line_number_45_up, &vrn45um, 14 28 55, COMBO_TERM_LONG)
+		COMBO(relative_line_number_46_up, &vrn46um, 14 29 55, COMBO_TERM_LONG)
+		COMBO(relative_line_number_47_up, &vrn47um, 14 15 55, COMBO_TERM_LONG)
+		COMBO(relative_line_number_48_up, &vrn48um, 14 16 55, COMBO_TERM_LONG)
+		COMBO(relative_line_number_49_up, &vrn49um, 14 17 55, COMBO_TERM_LONG)
+		COMBO(relative_line_number_1_down, &vrn1dm, 39 56, COMBO_TERM_LONG)
+		COMBO(relative_line_number_2_down, &vrn2dm, 40 56, COMBO_TERM_LONG)
+		COMBO(relative_line_number_3_down, &vrn3dm, 41 56, COMBO_TERM_LONG)
+		COMBO(relative_line_number_4_down, &vrn4dm, 27 56, COMBO_TERM_LONG)
+		COMBO(relative_line_number_5_down, &vrn5dm, 28 56, COMBO_TERM_LONG)
+		COMBO(relative_line_number_6_down, &vrn6dm, 29 56, COMBO_TERM_LONG)
+		COMBO(relative_line_number_7_down, &vrn7dm, 15 56, COMBO_TERM_LONG)
+		COMBO(relative_line_number_8_down, &vrn8dm, 16 56, COMBO_TERM_LONG)
+		COMBO(relative_line_number_9_down, &vrn9dm, 17 56, COMBO_TERM_LONG)
+		COMBO(relative_line_number_10_down, &vrn10dm, 25 56 62, COMBO_TERM_LONG)
+		COMBO(relative_line_number_11_down, &vrn11dm, 25 39 56, COMBO_TERM_LONG)
+		COMBO(relative_line_number_12_down, &vrn12dm, 25 40 56, COMBO_TERM_LONG)
+		COMBO(relative_line_number_13_down, &vrn13dm, 25 41 56, COMBO_TERM_LONG)
+		COMBO(relative_line_number_14_down, &vrn14dm, 25 27 56, COMBO_TERM_LONG)
+		COMBO(relative_line_number_15_down, &vrn15dm, 25 28 56, COMBO_TERM_LONG)
+		COMBO(relative_line_number_16_down, &vrn16dm, 25 29 56, COMBO_TERM_LONG)
+		COMBO(relative_line_number_17_down, &vrn17dm, 25 15 56, COMBO_TERM_LONG)
+		COMBO(relative_line_number_18_down, &vrn18dm, 25 16 56, COMBO_TERM_LONG)
+		COMBO(relative_line_number_19_down, &vrn19dm, 25 17 56, COMBO_TERM_LONG)
+		COMBO(relative_line_number_20_down, &vrn20dm, 26 56 62, COMBO_TERM_LONG)
+		COMBO(relative_line_number_21_down, &vrn21dm, 26 39 56, COMBO_TERM_LONG)
+		COMBO(relative_line_number_22_down, &vrn22dm, 26 40 56, COMBO_TERM_LONG)
+		COMBO(relative_line_number_23_down, &vrn23dm, 26 41 56, COMBO_TERM_LONG)
+		COMBO(relative_line_number_24_down, &vrn24dm, 26 27 56, COMBO_TERM_LONG)
+		COMBO(relative_line_number_25_down, &vrn25dm, 26 28 56, COMBO_TERM_LONG)
+		COMBO(relative_line_number_26_down, &vrn26dm, 26 29 56, COMBO_TERM_LONG)
+		COMBO(relative_line_number_27_down, &vrn27dm, 26 15 56, COMBO_TERM_LONG)
+		COMBO(relative_line_number_28_down, &vrn28dm, 26 16 56, COMBO_TERM_LONG)
+		COMBO(relative_line_number_29_down, &vrn29dm, 26 17 56, COMBO_TERM_LONG)
+		COMBO(relative_line_number_30_down, &vrn30dm, 38 56 62, COMBO_TERM_LONG)
+		COMBO(relative_line_number_31_down, &vrn31dm, 38 39 56, COMBO_TERM_LONG)
+		COMBO(relative_line_number_32_down, &vrn32dm, 38 40 56, COMBO_TERM_LONG)
+		COMBO(relative_line_number_33_down, &vrn33dm, 38 41 56, COMBO_TERM_LONG)
+		COMBO(relative_line_number_34_down, &vrn34dm, 38 27 56, COMBO_TERM_LONG)
+		COMBO(relative_line_number_35_down, &vrn35dm, 38 28 56, COMBO_TERM_LONG)
+		COMBO(relative_line_number_36_down, &vrn36dm, 38 29 56, COMBO_TERM_LONG)
+		COMBO(relative_line_number_37_down, &vrn37dm, 38 15 56, COMBO_TERM_LONG)
+		COMBO(relative_line_number_38_down, &vrn38dm, 38 16 56, COMBO_TERM_LONG)
+		COMBO(relative_line_number_39_down, &vrn39dm, 38 17 56, COMBO_TERM_LONG)
+		COMBO(relative_line_number_40_down, &vrn40dm, 14 56 62, COMBO_TERM_LONG)
+		COMBO(relative_line_number_41_down, &vrn41dm, 14 39 56, COMBO_TERM_LONG)
+		COMBO(relative_line_number_42_down, &vrn42dm, 14 40 56, COMBO_TERM_LONG)
+		COMBO(relative_line_number_43_down, &vrn43dm, 14 41 56, COMBO_TERM_LONG)
+		COMBO(relative_line_number_44_down, &vrn44dm, 14 27 56, COMBO_TERM_LONG)
+		COMBO(relative_line_number_45_down, &vrn45dm, 14 28 56, COMBO_TERM_LONG)
+		COMBO(relative_line_number_46_down, &vrn46dm, 14 29 56, COMBO_TERM_LONG)
+		COMBO(relative_line_number_47_down, &vrn47dm, 14 15 56, COMBO_TERM_LONG)
+		COMBO(relative_line_number_48_down, &vrn48dm, 14 16 56, COMBO_TERM_LONG)
+		COMBO(relative_line_number_49_down, &vrn49dm, 14 17 56, COMBO_TERM_LONG)
+		COMBO(vim_column_10, &vcm N1, 25 37, COMBO_TERM_LONG)
+		COMBO(vim_column_20, &vcm N2, 26 38, COMBO_TERM_LONG)
+		COMBO(vim_column_30, &vcm N3, 27 39, COMBO_TERM_LONG)
+		COMBO(vim_column_40, &vcm N4, 28 40, COMBO_TERM_LONG)
+		COMBO(vim_column_50, &vcm N5, 29 41, COMBO_TERM_LONG)
+		COMBO(vim_column_60, &vcm N6, 30 42, COMBO_TERM_LONG)
+		COMBO(vim_column_70, &vcm N7, 31 43, COMBO_TERM_LONG)
+		COMBO(vim_column_80, &vcm N8, 32 44, COMBO_TERM_LONG)
+		COMBO(vim_column_90, &vcm N9, 33 45, COMBO_TERM_LONG)
+		COMBO(vim_column_100, &vcm100, 34 46, COMBO_TERM_LONG)	
+		COMBO(right_ctrl, &kp RCTRL, 44 45, COMBO_TERM_LONG) // comma period
 	};
 
     keymap {
@@ -91,13 +396,13 @@
 
         baselayer_layer {
 		bindings = <
-	&kp LBKT &kp N1 &kp N2 &kp N3 &kp N4 &kp N5 &kp N6 &kp N7 &kp N8 &kp N9 &kp N0 &kp RBKT 
+	&kp PSCRN &kp N1 &kp N2 &kp N3 &kp N4 &kp N5 &kp N6 &kp N7 &kp N8 &kp N9 &kp N0 &tog GAMETHUMB
 	&kp EQUAL &vQht Q Q &vWht W W &vFht F F &vPht P P &vBht B B &vJht J J &vLht L L &vUht U U &vYht Y Y &kp SEMI &kp MINUS
 	&kp ESC &vAht A A &vRht R R &vSht S S &vTht T T &vGht G G &vMht M M &vNht N N &vEht E E &vIht I I &vOht O O &kp SQT
-	&kp BSLH &vZht Z Z &vXht X X &vCht C C &vDht D D &vVht V V &vKht K K &vHht H H &kp COMMA &kp DOT &kp FSLH &kp GRAVE 
-	&tog GAMETHUMB &kp HOME &kp END &kp LEFT &kp RIGHT &kp TAB &key_repeat &kp UP &kp DOWN &kp PGUP &kp PGDN &tog GAMETHUMB 
-	             &kp LGUI &kp LALT &ltr FUNCTIONS BSPC &kp LG(LC(LEFT)) &kp LG(LC(RIGHT)) &kp SPACE &kp RALT &kp RGUI
-		         &kp LCTRL &kp LSHFT &kp DEL &kp PSCRN &kp CAPS &kp ENTER &kp RSHFT &kp RCTRL
+	&htr HOME BSLH &vZht Z Z &vXht X X &vCht C C &vDht D D &vVht V V &vKht K K &vHht H H &htr LPAR COMMA &htr RPAR DOT &kp FSLH &htr END GRAVE 
+	&kp F1 &kp PGUP &kp PGDN &kp LEFT &kp RIGHT &htr LSHFT TAB &htr RSHFT ENTER &kp UP &kp DOWN &kp LBKT &kp RBKT &kp F12
+	             &kp F2 &kp LALT &htr LCTRL BSPC &kp F5 &kp F8 &kp SPACE &kp RALT &kp F11
+		         &kp F3 &ltr FUNCTIONS F4 &htr LGUI DEL &kp F6 &kp F7 &htr RGUI &key_repeat &ltr FUNCTIONS F9 &kp F10
 		>;
 	};
 
@@ -107,9 +412,9 @@
 	&trans &kp Q  &kp W  &kp F  &kp P  &kp B  &kp J  &kp L  &kp U  &kp Y  &trans &trans
 	&trans &kp A  &kp R  &kp S  &kp T  &kp G  &kp M  &kp N  &kp E  &kp I  &kp O  &trans
 	&trans &kp Z  &kp X  &kp C  &kp D  &kp V  &kp K  &kp H  &trans &trans &trans &trans
-	&trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans
-	             &trans &trans &kp DEL &trans &trans &trans &trans &trans
-				 &trans &trans &kp CAPS &trans &trans &trans &trans &trans
+	&trans &trans &trans &trans &trans &kp TAB &kp ENTER &trans &trans &trans &trans &trans
+	             &trans &trans &kp BSPC &trans &trans &trans &trans &trans
+				 &trans &trans &kp DEL &trans &trans &kp CAPS &trans &trans
 		>;
 	};
 
