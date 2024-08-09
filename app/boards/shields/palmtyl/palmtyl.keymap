@@ -39,16 +39,43 @@
 		bindings = <&kp N##TENS &kp N##ONES &kp DOWN>; \
 	};  
 
-#define VARIABLE_HOLD_TAP_TAPPING_TERM_MS 500
-#define VARIABLE_HOLD_QUICK_TAP_MS 400
+#define HOLD_TAP_TAPPING_TERM_MS 500
+#define HOLD_QUICK_TAP_MS 400
+#define NUMBER_KEY_HOLD_TAP(NUMBER) \
+	n##NUMBER##ht: number_key_##NUMBER##_hold_tap { \
+		compatible = "zmk,behavior-hold-tap"; \
+		#binding-cells = <2>; \
+		flavor = "tap-preferred"; \
+		tapping-term-ms = <HOLD_TAP_TAPPING_TERM_MS>; \
+		quick-tap-ms = <HOLD_QUICK_TAP_MS>; \
+		bindings = <&n##NUMBER##htm>, <&kp>; \
+	};
+#define GENERIC_KEY_HOLD_TAP(SHORTNAME) \
+	SHORTNAME##ht: SHORTNAME##_hold_tap { \
+		compatible = "zmk,behavior-hold-tap"; \
+		#binding-cells = <2>; \
+		flavor = "tap-preferred"; \
+		tapping-term-ms = <HOLD_TAP_TAPPING_TERM_MS>; \
+		quick-tap-ms = <HOLD_QUICK_TAP_MS>; \
+		bindings = <&##SHORTNAME##htm>, <&kp>; \
+	};
 #define VARIABLE_HOLD_TAP(REGISTER) \
 	v##REGISTER##ht: variable_vim_register_##REGISTER##_hold_tap { \
 		compatible = "zmk,behavior-hold-tap"; \
 		#binding-cells = <2>; \
 		flavor = "tap-preferred"; \
-		tapping-term-ms = <VARIABLE_HOLD_TAP_TAPPING_TERM_MS>; \
-		quick-tap-ms = <VARIABLE_HOLD_QUICK_TAP_MS>; \
-		bindings = <&pvrmop &kp>; \
+		tapping-term-ms = <HOLD_TAP_TAPPING_TERM_MS>; \
+		quick-tap-ms = <HOLD_QUICK_TAP_MS>; \
+		bindings = <&pvrmop>, <&kp>; \
+	};
+#define FUNCTION_KEY_HOLD_TAP(NUMBER) \
+	f##NUMBER##ht: function_key_##NUMBER##_hold_tap { \
+		compatible = "zmk,behavior-hold-tap"; \
+		#binding-cells = <2>; \
+		flavor = "tap-preferred"; \
+		tapping-term-ms = <HOLD_TAP_TAPPING_TERM_MS>; \
+		quick-tap-ms = <HOLD_QUICK_TAP_MS>; \
+		bindings = <&f##NUMBER##htm>, <&kp>; \
 	};
 
 / {
@@ -61,10 +88,381 @@
 				, <&kp MACRO_PLACEHOLDER &kp N0 &kp PIPE>
 				;
 		};
-		vcm100: vim_column_100_macro {
+		vc100m: vim_column_100_macro {
 			compatible = "zmk,behavior-macro";
 			#binding-cells = <0>;
 			bindings = <&kp N1 &kp N0 &kp N0 &kp PIPE>;
+		};
+		dtappendlpm: dtappendlp_macro {
+			compatible = "zmk,behavior-macro";
+			#binding-cells = <0>;
+			bindings = <&kp DOT &kp A &kp P &kp P &kp E &kp N &kp D &kp LPAR>;
+		};
+		spakeqspm: spakeqsp_macro {
+			compatible = "zmk,behavior-macro";
+			#binding-cells = <0>;
+			bindings = <&kp SPACE &kp STAR &kp EQUAL &kp SPACE>;
+		};
+		speqsp0erm: speqsp0er_macro {
+			compatible = "zmk,behavior-macro";
+			#binding-cells = <0>;
+			bindings = <&kp SPACE &kp EQUAL &kp SPACE &kp N0 &kp ENTER>;
+		};
+		// ligatures
+		speqspm: speqsp_macro {
+			compatible = "zmk,behavior-macro";
+			#binding-cells = <0>;
+			bindings = <&kp SPACE &kp EQUAL &kp SPACE>;
+		};
+		sppsspm: sppssp_macro {
+			compatible = "zmk,behavior-macro";
+			#binding-cells = <0>;
+			bindings = <&kp SPACE &kp PLUS &kp SPACE>;
+		};
+		spmsspm: spmssp_macro {
+			compatible = "zmk,behavior-macro";
+			#binding-cells = <0>;
+			bindings = <&kp SPACE &kp MINUS &kp SPACE>;
+		};
+		spltspm: spltsp_macro {
+			compatible = "zmk,behavior-macro";
+			#binding-cells = <0>;
+			bindings = <&kp SPACE &kp LT &kp SPACE>;
+		};
+		spgtspm: spgtsp_macro {
+			compatible = "zmk,behavior-macro";
+			#binding-cells = <0>;
+			bindings = <&kp SPACE &kp GT &kp SPACE>;
+		};
+		spcneqspm: spcneqsp_macro {
+			compatible = "zmk,behavior-macro";
+			#binding-cells = <0>;
+			bindings = <&kp SPACE &kp COLON &kp EQUAL &kp SPACE>;
+		};
+		speqeqspm: speqeqsp_macro {
+			compatible = "zmk,behavior-macro";
+			#binding-cells = <0>;
+			bindings = <&kp SPACE &kp EQUAL &kp EQUAL &kp SPACE>;
+		};
+		splteqspm: splteqsp_macro {
+			compatible = "zmk,behavior-macro";
+			#binding-cells = <0>;
+			bindings = <&kp SPACE &kp LT &kp EQUAL &kp SPACE>;
+		};
+		spgteqspm: spgteqsp_macro {
+			compatible = "zmk,behavior-macro";
+			#binding-cells = <0>;
+			bindings = <&kp SPACE &kp GT &kp EQUAL &kp SPACE>;
+		};
+		spandspm: spandsp_macro {
+			compatible = "zmk,behavior-macro";
+			#binding-cells = <0>;
+			bindings = <&kp SPACE &kp A &kp N &kp D &kp SPACE>;
+		};
+		breakerbem: breakerbe_macro {
+			compatible = "zmk,behavior-macro";
+			#binding-cells = <0>;
+			bindings = <&kp B &kp R &kp E &kp A &kp K &kp ENTER &kp BSPC>;
+		};
+		spsphhspm: spsphhsp_macro {
+			compatible = "zmk,behavior-macro";
+			#binding-cells = <0>;
+			bindings = <&kp SPACE &kp SPACE &kp HASH &kp SPACE>;
+		};
+		erdefspm: erdefsp_macro {
+			compatible = "zmk,behavior-macro";
+			#binding-cells = <0>;
+			bindings = <&kp ENTER &kp D &kp E &kp F &kp SPACE>;
+		};
+		erbeelsecnerm: _macro {
+			compatible = "zmk,behavior-macro";
+			#binding-cells = <0>;
+			bindings = <&kp ENTER &kp BSPC &kp E &kp L &kp S &kp L &kp E &kp COLON &kp ENTER>;
+		};
+		forspm: forsp_macro {
+			compatible = "zmk,behavior-macro";
+			#binding-cells = <0>;
+			bindings = <&kp F &kp O &kp R &kp SPACE>;
+		};
+		rangelpm: rangelp_macro {
+			compatible = "zmk,behavior-macro";
+			#binding-cells = <0>;
+			bindings = <&kp R &kp A &kp N &kp G &kp E &kp LPAR>;
+		};
+		spnonespm: spnonesp_macro {
+			compatible = "zmk,behavior-macro";
+			#binding-cells = <0>;
+			bindings = <&kp SPACE &kp LS(N) &kp O &kp N &kp E &kp SPACE>;
+		};
+		ifspm: ifsp_macro {
+			compatible = "zmk,behavior-macro";
+			#binding-cells = <0>;
+			bindings = <&kp I &kp F &kp SPACE>;
+		};
+		spinspm: spinsp_macro {
+			compatible = "zmk,behavior-macro";
+			#binding-cells = <0>;
+			bindings = <&kp SPACE &kp I &kp N &kp SPACE>;
+		};
+		continueerbem: continueerbe_macro {
+			compatible = "zmk,behavior-macro";
+			#binding-cells = <0>;
+			bindings = <&kp C &kp O &kp N &kp T &kp I &kp N &kp U &kp E &kp ENTER &kp BSPC>;
+		};
+		erbeelifspm: erbeelifsp_macro {
+			compatible = "zmk,behavior-macro";
+			#binding-cells = <0>;
+			bindings = <&kp ENTER &kp BSPC &kp E &kp L &kp I &kp F &kp SPACE>;
+		};
+		spmseqspm: spmseqsp_macro {
+			compatible = "zmk,behavior-macro";
+			#binding-cells = <0>;
+			bindings = <&kp SPACE &kp MINUS &kp EQUAL &kp SPACE>;
+		};
+		spnotspm: spnotsp_macro {
+			compatible = "zmk,behavior-macro";
+			#binding-cells = <0>;
+			bindings = <&kp SPACE &kp N &kp O &kp T &kp SPACE>;
+		};
+		sporspm: sporsp_macro {
+			compatible = "zmk,behavior-macro";
+			#binding-cells = <0>;
+			bindings = <&kp SPACE &kp O &kp R &kp SPACE>;
+		};
+		sppseqspm: sppseqsp_macro {
+			compatible = "zmk,behavior-macro";
+			#binding-cells = <0>;
+			bindings = <&kp SPACE &kp PLUS &kp EQUAL &kp SPACE>;
+		};
+		lenlpm: lenlp_macro {
+			compatible = "zmk,behavior-macro";
+			#binding-cells = <0>;
+			bindings = <&kp L &kp E &kp N &kp LPAR>;
+		};
+		returnspm: returnsp_macro {
+			compatible = "zmk,behavior-macro";
+			#binding-cells = <0>;
+			bindings = <&kp R &kp E &kp T &kp U &kp R &kp N &kp SPACE>;
+		};
+		falsespm: falsesp_macro {
+			compatible = "zmk,behavior-macro";
+			#binding-cells = <0>;
+			bindings = <&kp LS(F) &kp A &kp L &kp S &kp E &kp SPACE>;
+		};
+		truespm: truesp_macro {
+			compatible = "zmk,behavior-macro";
+			#binding-cells = <0>;
+			bindings = <&kp LS(T) &kp R &kp U &kp E &kp SPACE>;
+		};
+		spemeqspm: spemeqsp_macro {
+			compatible = "zmk,behavior-macro";
+			#binding-cells = <0>;
+			bindings = <&kp SPACE &kp EXCL &kp EQUAL &kp SPACE>;
+		};
+		printlpm: printlp_macro {
+			compatible = "zmk,behavior-macro";
+			#binding-cells = <0>;
+			bindings = <&kp P &kp R &kp I &kp N &kp T &kp LPAR>;
+		};
+		whilespm: whilesp_macro {
+			compatible = "zmk,behavior-macro";
+			#binding-cells = <0>;
+			bindings = <&kp W &kp H &kp I &kp L &kp E &kp SPACE>;
+		};
+		maxlpm: maxlp_macro {
+			compatible = "zmk,behavior-macro";
+			#binding-cells = <0>;
+			bindings = <&kp M &kp A &kp X &kp LPAR>;
+		};
+		trycnerm: trycner_macro {
+			compatible = "zmk,behavior-macro";
+			#binding-cells = <0>;
+			bindings = <&kp T &kp R &kp Y &kp COLON &kp ENTER>;
+		};
+		minlpm: minlp_macro {
+			compatible = "zmk,behavior-macro";
+			#binding-cells = <0>;
+			bindings = <&kp M &kp I &kp N &kp LPAR>;
+		};
+		n1htm: number_key_1_hold_tap_macro {
+			compatible = "zmk,behavior-macro";
+			#binding-cells = <0>;
+			bindings = <&kp N1>;
+		};
+		n2htm: number_key_2_hold_tap_macro {
+			compatible = "zmk,behavior-macro";
+			#binding-cells = <0>;
+			bindings = <&kp N2>;
+		};
+		n3htm: number_key_3_hold_tap_macro {
+			compatible = "zmk,behavior-macro";
+			#binding-cells = <0>;
+			bindings = <&kp N3>;
+		};
+		n4htm: number_key_4_hold_tap_macro {
+			compatible = "zmk,behavior-macro";
+			#binding-cells = <0>;
+			bindings = <&kp N4>;
+		};
+		n5htm: number_key_5_hold_tap_macro {
+			compatible = "zmk,behavior-macro";
+			#binding-cells = <0>;
+			bindings = <&kp N5>;
+		};
+		n6htm: number_key_6_hold_tap_macro {
+			compatible = "zmk,behavior-macro";
+			#binding-cells = <0>;
+			bindings = <&kp N6>;
+		};
+		n7htm: number_key_7_hold_tap_macro {
+			compatible = "zmk,behavior-macro";
+			#binding-cells = <0>;
+			bindings = <&kp N7>;
+		};
+		n8htm: number_key_8_hold_tap_macro {
+			compatible = "zmk,behavior-macro";
+			#binding-cells = <0>;
+			bindings = <&kp N8>;
+		};
+		n9htm: number_key_9_hold_tap_macro {
+			compatible = "zmk,behavior-macro";
+			#binding-cells = <0>;
+			bindings = <&kp N9>;
+		};
+		n0htm: number_key_0_hold_tap_macro {
+			compatible = "zmk,behavior-macro";
+			#binding-cells = <0>;
+			bindings = <&kp N0>;
+		};
+		pshtm: print_screen_hold_tap_macro {
+			compatible = "zmk,behavior-macro";
+			#binding-cells = <0>;
+			bindings = <&kp P &kp S>;
+		};
+		gthtm: gamethumb_hold_tap_macro {
+			compatible = "zmk,behavior-macro";
+			#binding-cells = <0>;
+			bindings = <&kp G &kp T>;
+		};
+		eqhtm: equals_hold_tap_macro {
+			compatible = "zmk,behavior-macro";
+			#binding-cells = <0>;
+			bindings = <&kp E &kp Q>;
+		};
+		schtm: semicolon_hold_tap_macro {
+			compatible = "zmk,behavior-macro";
+			#binding-cells = <0>;
+			bindings = <&kp COLON &kp ENTER>;
+		};
+		mshtm: minus_hold_tap_macro {
+			compatible = "zmk,behavior-macro";
+			#binding-cells = <0>;
+			bindings = <&kp M &kp S>;
+		};
+		eehtm: escape_hold_tap_macro {
+			compatible = "zmk,behavior-macro";
+			#binding-cells = <0>;
+			bindings = <&kp E &kp E>;
+		};
+		sqhtm: single_quote_hold_tap_macro {
+			compatible = "zmk,behavior-macro";
+			#binding-cells = <0>;
+			bindings = <&kp S &kp Q>;
+		};
+		bshtm: backslash_hold_tap_macro {
+			compatible = "zmk,behavior-macro";
+			#binding-cells = <0>;
+			bindings = <&kp B &kp S>;
+		};
+		cahtm: comma_hold_tap_macro {
+			compatible = "zmk,behavior-macro";
+			#binding-cells = <0>;
+			bindings = <&kp C &kp A>;
+		};
+		dthtm: dot_hold_tap_macro {
+			compatible = "zmk,behavior-macro";
+			#binding-cells = <0>;
+			bindings = <&kp D &kp T>;
+		};
+		fshtm: forwardslash_hold_tap_macro {
+			compatible = "zmk,behavior-macro";
+			#binding-cells = <0>;
+			bindings = <&kp F &kp S>;
+		};
+		gehtm: grave_hold_tap_macro {
+			compatible = "zmk,behavior-macro";
+			#binding-cells = <0>;
+			bindings = <&kp G &kp E>;
+		};
+		lbhtm: left_bracket_hold_tap_macro {
+			compatible = "zmk,behavior-macro";
+			#binding-cells = <0>;
+			bindings = <&kp L &kp B>;
+		};
+		rbhtm: right_bracket_hold_tap_macro {
+			compatible = "zmk,behavior-macro";
+			#binding-cells = <0>;
+			bindings = <&kp R &kp B>;
+		};
+		sehtm: space_hold_tap_macro {
+			compatible = "zmk,behavior-macro";
+			#binding-cells = <0>;
+			bindings = <&kp S &kp E>;
+		};
+		f1htm: function_key_1_hold_tap_macro {
+			compatible = "zmk,behavior-macro";
+			#binding-cells = <0>;
+			bindings = <&kp F &kp N0 &kp N1>;
+		};
+		f2htm: function_key_2_hold_tap_macro {
+			compatible = "zmk,behavior-macro";
+			#binding-cells = <0>;
+			bindings = <&kp F &kp N0 &kp N2>;
+		};
+		f3htm: function_key_3_hold_tap_macro {
+			compatible = "zmk,behavior-macro";
+			#binding-cells = <0>;
+			bindings = <&kp F &kp N0 &kp N3>;
+		};
+		f5htm: function_key_5_hold_tap_macro {
+			compatible = "zmk,behavior-macro";
+			#binding-cells = <0>;
+			bindings = <&kp F &kp N0 &kp N5>;
+		};
+		f6htm: function_key_6_hold_tap_macro {
+			compatible = "zmk,behavior-macro";
+			#binding-cells = <0>;
+			bindings = <&kp F &kp N0 &kp N6>;
+		};
+		f7htm: function_key_7_hold_tap_macro {
+			compatible = "zmk,behavior-macro";
+			#binding-cells = <0>;
+			bindings = <&kp F &kp N0 &kp N7>;
+		};
+		f8htm: function_key_8_hold_tap_macro {
+			compatible = "zmk,behavior-macro";
+			#binding-cells = <0>;
+			bindings = <&kp F &kp N0 &kp N8>;
+		};
+		f9htm: function_key_9_hold_tap_macro {
+			compatible = "zmk,behavior-macro";
+			#binding-cells = <0>;
+			bindings = <&kp F &kp N0 &kp N9>;
+		};
+		f10htm: function_key_10_hold_tap_macro {
+			compatible = "zmk,behavior-macro";
+			#binding-cells = <0>;
+			bindings = <&kp F &kp N1 &kp N0>;
+		};
+		f11htm: function_key_11_hold_tap_macro {
+			compatible = "zmk,behavior-macro";
+			#binding-cells = <0>;
+			bindings = <&kp F &kp N1 &kp N1>;
+		};
+		f12htm: function_key_12_hold_tap_macro {
+			compatible = "zmk,behavior-macro";
+			#binding-cells = <0>;
+			bindings = <&kp F &kp N1 &kp N2>;
 		};
 		MACRO_VIM_RELATIVE_LINE_1_DIGIT_NUMBER_UP(1)
 		MACRO_VIM_RELATIVE_LINE_1_DIGIT_NUMBER_UP(2)
@@ -220,6 +618,38 @@
 			quick-tap-ms = <400>;
 			bindings = <&kp>, <&kp>;
 		};
+		NUMBER_KEY_HOLD_TAP(1)
+		NUMBER_KEY_HOLD_TAP(2)
+		NUMBER_KEY_HOLD_TAP(3)
+		NUMBER_KEY_HOLD_TAP(4)
+		NUMBER_KEY_HOLD_TAP(5)
+		NUMBER_KEY_HOLD_TAP(6)
+		NUMBER_KEY_HOLD_TAP(7)
+		NUMBER_KEY_HOLD_TAP(8)
+		NUMBER_KEY_HOLD_TAP(9)
+		NUMBER_KEY_HOLD_TAP(0)
+		GENERIC_KEY_HOLD_TAP(ps)
+		gtht: gamethumb_layer_hold_tap {
+			compatible = "zmk,behavior-hold-tap";
+			#binding-cells = <2>;
+			flavor = "tap-preferred";
+			tapping-term-ms = <150>;
+			quick-tap-ms = <400>;
+			bindings = <&gthtm>, <&tog>;
+		};
+		GENERIC_KEY_HOLD_TAP(eq)
+		GENERIC_KEY_HOLD_TAP(sc)
+		GENERIC_KEY_HOLD_TAP(ms)
+		GENERIC_KEY_HOLD_TAP(ee)
+		GENERIC_KEY_HOLD_TAP(sq)
+		GENERIC_KEY_HOLD_TAP(bs)
+		GENERIC_KEY_HOLD_TAP(ca)
+		GENERIC_KEY_HOLD_TAP(dt)
+		GENERIC_KEY_HOLD_TAP(fs)
+		GENERIC_KEY_HOLD_TAP(ge)
+		GENERIC_KEY_HOLD_TAP(lb)
+		GENERIC_KEY_HOLD_TAP(rb)
+		GENERIC_KEY_HOLD_TAP(se)
 		VARIABLE_HOLD_TAP(Q)
 		VARIABLE_HOLD_TAP(W)
 		VARIABLE_HOLD_TAP(F)
@@ -246,13 +676,71 @@
 		VARIABLE_HOLD_TAP(V) 
 		VARIABLE_HOLD_TAP(K) 
 		VARIABLE_HOLD_TAP(H)
+		FUNCTION_KEY_HOLD_TAP(1)
+		FUNCTION_KEY_HOLD_TAP(2)
+		FUNCTION_KEY_HOLD_TAP(3)
+		FUNCTION_KEY_HOLD_TAP(5)
+		FUNCTION_KEY_HOLD_TAP(6)
+		FUNCTION_KEY_HOLD_TAP(7)
+		FUNCTION_KEY_HOLD_TAP(8)
+		FUNCTION_KEY_HOLD_TAP(9)
+		FUNCTION_KEY_HOLD_TAP(10)
+		FUNCTION_KEY_HOLD_TAP(11)
+		FUNCTION_KEY_HOLD_TAP(12)
 	};
 
     combos {
         compatible = "zmk,combos";
-		COMBO(leet_vscode_copy_paste_side_by_side, &lvspsbs, 12 70, COMBO_TERM_LONG) // equals + gui
-   		COMBO(vim_write_all_macro, &vwam, 22 70, COMBO_TERM_LONG) // colon + gui
-  		COMBO(store_word_in_vim_register_Q, &swivrmop Q, 13 70, COMBO_TERM_LONG) // alpha + gui
+		COMBO(leet_vscode_copy_paste_side_by_side, &lvspsbs, 12 70, COMBO_TERM_LONG) // equals + del
+   		COMBO(vim_write_all_macro, &vwam, 22 70, COMBO_TERM_LONG) // colon + del
+		COMBO(right_ctrl, &kp RCTRL, 44 45, COMBO_TERM_LONG) // comma period
+		COMBO(underscore, &kp UNDERSCORE, 53 54, COMBO_TERM_LONG) // tab enter
+		COMBO(sp_eq_sp, &speqspm, 70 73, COMBO_TERM_LONG) // del repeat
+		//COMBO(, &m,  1 55, COMBO_TERM_LONG) // 1 + bksp 
+		COMBO(dtappendlp,&dtappendlpm,2 55,COMBO_TERM_LONG) // 2 + bksp 
+		//COMBO(, &spsphhspm,  3 55, COMBO_TERM_LONG) // 3 + bksp 
+		//COMBO(, &m,  4 55, COMBO_TERM_LONG) // 4 + bksp 
+		//COMBO(, &m,  5 55, COMBO_TERM_LONG) // 5 + bksp 
+		//COMBO(, &m,  6 55, COMBO_TERM_LONG) // 6 + bksp 
+		//COMBO(, &m,  7 55, COMBO_TERM_LONG) // 7 + bksp 
+		COMBO(spakeqsp, &spakeqspm,  8 55, COMBO_TERM_LONG) // 8 + bksp 
+		//COMBO(, &m,  9 55, COMBO_TERM_LONG) // 9 + bksp 
+		COMBO(speqsp0er,&speqsp0erm, 10 55,COMBO_TERM_LONG) // 0 + bksp 
+		COMBO(sppssp,   &sppsspm,  12 55, COMBO_TERM_LONG) // = + bksp 
+		COMBO(spcneqsp, &spcneqspm, 22 55, COMBO_TERM_LONG) // ; + bksp 
+		COMBO(speqeqsp, &speqeqspm, 24 55, COMBO_TERM_LONG) // esc + bksp 
+		COMBO(spmssp,   &spmsspm,   23 55, COMBO_TERM_LONG) // - + bksp 
+		COMBO(splteqsp, &splteqspm, 12 44, COMBO_TERM_LONG) // = + , 
+		COMBO(spgteqsp, &spgteqspm, 12 45, COMBO_TERM_LONG) // = + . 
+		COMBO(spltsp,   &spltspm,   44 55, COMBO_TERM_LONG) // , + bksp 
+		COMBO(spgtsp,   &spgtspm,   45 55, COMBO_TERM_LONG) // . + bksp 
+		COMBO(spandsp,  &spandspm,  25 55, COMBO_TERM_LONG) // a + bksp 
+		COMBO(breakerbe, &breakerbem, 17 55, COMBO_TERM_LONG) // b + bksp 
+		COMBO(spsphhsp, &spsphhspm, 39 55, COMBO_TERM_LONG) // c + bksp, comment 
+		COMBO(erdefsp, &erdefspm, 40 55, COMBO_TERM_LONG) // d + bksp 
+		COMBO(erbeelsecner, &erbeelsecnerm, 32 55, COMBO_TERM_LONG) // e + bksp 
+		COMBO(forsp, &forspm, 15 55, COMBO_TERM_LONG) // f + bksp 
+		COMBO(rangelp, &rangelpm, 29 55, COMBO_TERM_LONG) // g + bksp 
+		COMBO(spnonesp, &spnonespm, 43 55, COMBO_TERM_LONG) // h + bksp 
+		COMBO(ifsp, &ifspm, 33 55, COMBO_TERM_LONG) // i + bksp 
+		COMBO(spinsp, &spinspm, 18 55, COMBO_TERM_LONG) // j + bksp 
+		COMBO(continueerbe, &continueerbem, 42 55, COMBO_TERM_LONG) // k + bksp 
+		COMBO(erbeelifsp, &erbeelifspm, 19 55, COMBO_TERM_LONG) // l + bksp 
+		COMBO(spmseqsp, &sppseqspm, 30 55, COMBO_TERM_LONG) // m + bksp 
+		COMBO(spnotsp, &spnotspm, 31 55, COMBO_TERM_LONG) // n + bksp 
+		COMBO(sporsp, &sporspm, 34 55, COMBO_TERM_LONG) // o + bksp 
+		COMBO(sppseqsp, &sppseqspm, 17 55, COMBO_TERM_LONG) // p + bksp 
+		COMBO(lenlp, &lenlpm, 13 55, COMBO_TERM_LONG) // q + bksp 
+		COMBO(returnsp, &returnspm, 26 55, COMBO_TERM_LONG) // r + bksp 
+		COMBO(falsesp, &falsespm, 27 55, COMBO_TERM_LONG) // s + bksp 
+		COMBO(truesp, &truespm, 28 55, COMBO_TERM_LONG) // t + bksp 
+		COMBO(spemeqsp, &spemeqspm, 20 55, COMBO_TERM_LONG) // u + bksp, unequal 
+		COMBO(printlp, &printlpm, 41 55, COMBO_TERM_LONG) // v + bksp , view
+		COMBO(whilesp, &whilespm, 14 55, COMBO_TERM_LONG) // w + bksp 
+		COMBO(maxlp, &maxlpm, 38 55, COMBO_TERM_LONG) // x + bksp 
+		COMBO(trycner, &trycnerm, 21 55, COMBO_TERM_LONG) // y + bksp 
+		COMBO(minlp, &minlpm, 37 55, COMBO_TERM_LONG) // z + bksp 
+  		COMBO(store_word_in_vim_register_Q, &swivrmop Q, 13 70, COMBO_TERM_LONG) // alpha + del
   		COMBO(store_word_in_vim_register_W, &swivrmop W, 14 70, COMBO_TERM_LONG)
   		COMBO(store_word_in_vim_register_F, &swivrmop F, 15 70, COMBO_TERM_LONG)
   		COMBO(store_word_in_vim_register_P, &swivrmop P, 16 70, COMBO_TERM_LONG)
@@ -387,8 +875,7 @@
 		COMBO(vim_column_70, &vcm N7, 31 43, COMBO_TERM_LONG)
 		COMBO(vim_column_80, &vcm N8, 32 44, COMBO_TERM_LONG)
 		COMBO(vim_column_90, &vcm N9, 33 45, COMBO_TERM_LONG)
-		COMBO(vim_column_100, &vcm100, 34 46, COMBO_TERM_LONG)	
-		COMBO(right_ctrl, &kp RCTRL, 44 45, COMBO_TERM_LONG) // comma period
+		COMBO(vim_column_100, &vc100m, 34 46, COMBO_TERM_LONG)	
 	};
 
     keymap {
@@ -396,15 +883,26 @@
 
         baselayer_layer {
 		bindings = <
-	&kp PSCRN &kp N1 &kp N2 &kp N3 &kp N4 &kp N5 &kp N6 &kp N7 &kp N8 &kp N9 &kp N0 &tog GAMETHUMB
-	&kp EQUAL &vQht Q Q &vWht W W &vFht F F &vPht P P &vBht B B &vJht J J &vLht L L &vUht U U &vYht Y Y &kp SEMI &kp MINUS
-	&kp ESC &vAht A A &vRht R R &vSht S S &vTht T T &vGht G G &vMht M M &vNht N N &vEht E E &vIht I I &vOht O O &kp SQT
-	&htr HOME BSLH &vZht Z Z &vXht X X &vCht C C &vDht D D &vVht V V &vKht K K &vHht H H &htr LPAR COMMA &htr RPAR DOT &kp FSLH &htr END GRAVE 
-	&kp F1 &kp PGUP &kp PGDN &kp LEFT &kp RIGHT &htr LSHFT TAB &htr RSHFT ENTER &kp UP &kp DOWN &kp LBKT &kp RBKT &kp F12
-	             &kp F2 &kp LALT &htr LCTRL BSPC &kp F5 &kp F8 &kp SPACE &kp RALT &kp F11
-		         &kp F3 &ltr FUNCTIONS F4 &htr LGUI DEL &kp F6 &kp F7 &htr RGUI &key_repeat &ltr FUNCTIONS F9 &kp F10
+	&psht 0 PSCRN &n1ht 0 N1 &n2ht 0 N2 &n3ht 0 N3 &n4ht 0 N4 &n4ht 0 N5 &n6ht 0 N6 &n7ht 0 N7 &n8ht 0 N8 &n9ht 0 N9 &n0ht 0 N0 &gtht 0 GAMETHUMB
+	&eqht 0 EQUAL &vQht Q Q &vWht W W &vFht F F &vPht P P &vBht B B &vJht J J &vLht L L &vUht U U &vYht Y Y &scht 0 SEMI &msht 0 MINUS
+	&eeht 0 ESC &vAht A A &vRht R R &vSht S S &vTht T T &vGht G G &vMht M M &vNht N N &vEht E E &vIht I I &vOht O O &sqht 0 SQT
+	&bsht 0 BSLH &vZht Z Z &vXht X X &vCht C C &vDht D D &vVht V V &vKht K K &vHht H H &caht 0 COMMA &dtht 0 DOT &fsht 0 FSLH &geht 0 GRAVE 
+	&f1ht 0 F1 &htr HOME PGUP &htr END PGDN &kp LEFT &kp RIGHT &htr LSHFT TAB &htr RSHFT ENTER &kp UP &kp DOWN &lbht 0 LBKT &rbht 0 RBKT &f12ht 0 F12
+	&f2ht 0 F2 &htr LG(LC(LEFT)) LALT &htr LCTRL BSPC &f5ht 0 F5 &f8ht 0 F8 &seht 0 SPACE &htr LG(LC(RIGHT)) RALT &f11ht 0 F11
+	&f3ht 0 F3 &ltr FUNCTIONS F4 &htr LGUI DEL &f6ht 0 F6 &f7ht 0 F7 &htr RGUI &key_repeat &f9ht 0 F9 &f10ht 0 F10
 		>;
 	};
+//       baselayer_layer {
+//		bindings = <
+//	&psht PSCRN &n1ht N1 &n2ht N2 &n3ht N3 &n4ht N4 &n4ht N5 &n6ht N6 &n7ht N7 &n8ht N8 &n9ht N9 &n0ht N0 &gtht GAMETHUMB
+//	&eqht EQUAL &vQht Q Q &vWht W W &vFht F F &vPht P P &vBht B B &vJht J J &vLht L L &vUht U U &vYht Y Y &scht SEMI &msht MINUS
+//	&eeht ESC &vAht A A &vRht R R &vSht S S &vTht T T &vGht G G &vMht M M &vNht N N &vEht E E &vIht I I &vOht O O &sqht SQT
+//	&bsht BSLH &vZht Z Z &vXht X X &vCht C C &vDht D D &vVht V V &vKht K K &vHht H H &caht COMMA &dtht DOT &fsht FSLH &geht GRAVE 
+//	&f1ht F1 &htr HOME PGUP &htr END PGDN &kp LEFT &kp RIGHT &htr LSHFT TAB &htr RSHFT ENTER &kp UP &kp DOWN &lbht LBKT &rbht RBKT &f12ht F12
+//	&f2ht F2 &htr LG(LC(LEFT)) LALT &htr LCTRL BSPC &f5ht F5 &f8ht F8 &seht SPACE &htr LG(LC(RIGHT)) RALT &f11ht F11
+//	&f3ht F3 &ltr FUNCTIONS F4 &htr LGUI DEL &f6ht F6 &f7ht F7 &htr RGUI &key_repeat &f9ht F9 &f10ht F10
+//		>;
+//	};
 
 	gamethumb_layer {
 		bindings = <
