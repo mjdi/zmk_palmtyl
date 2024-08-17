@@ -6,10 +6,13 @@
 #define BASELAYER 0
 #define GAMETHUMB 27
 #define FUNCTIONS 28
-#define HOLD_TAP_TAPPING_TERM_MS 500
+#define HOLD_TAP_TAPPING_TERM_MS 450
 #define HOLD_QUICK_TAP_MS 400
 #define COMBO_TERM_LONG 150 
 
+
+#define SHOLD PAUSE_BREAK
+#define STAP SLCK
 #define SA PAUSE_BREAK
 #define SB SLCK
 #define SC C_MUTE 
@@ -31,11 +34,11 @@
 #define SS KP_MULTIPLY
 #define ST KP_DIVIDE
 #define SU KP_DOT
-#define SV INS
-#define SW RSHFT
-#define SX RCTRL
-#define SY RALT
-#define SZ RGUI
+#define SV KP_ENTER
+#define SW INS
+#define SX CAPS
+#define SY C_VOL_UP
+#define SZ C_VOL_DN
 
 #define MACRO_VIM_RELATIVE_LINE_1_DIGIT_NUMBER_UP(ONES) \
 	vrn##ONES##um: vim_rnu_##ONES##_up_macro { \
@@ -114,13 +117,13 @@
 	A1##_##A2##_hthm: A1##_##A2##_holdtap_hold_macro { \
 		compatible = "zmk,behavior-macro"; \
 		#binding-cells = <0>; \
-		bindings = <&kp K_APP &kp K_APP &kp A1 &kp A2>; \
+		bindings = <&kp A1 &kp A2 &kp SHOLD>; \
 	};  
 #define BIGRAM_VARIABLE_VIM_CRUD_HOLD_TAP_TAP_MACRO(A1,A2) \
 	A1##_##A2##_httm: A1##_##A2##_holdtap_tap_macro { \
 		compatible = "zmk,behavior-macro"; \
 		#binding-cells = <0>; \
-		bindings = <&kp K_APP &kp A1 &kp A2>; \
+		bindings = <&kp A1 &kp A2 &kp STAP>; \
 	};         
 #define FUNCTION_KEY_HOLD_TAP(NUMBER) \
 	f##NUMBER##ht: function_key_##NUMBER##_hold_tap { \
@@ -2008,6 +2011,14 @@
 			quick-tap-ms = <400>;
 			bindings = <&kp>, <&kp>;
 		};
+		htrkr: mod_tap_repeat_key_repeat {
+			compatible = "zmk,behavior-hold-tap";
+			#binding-cells = <2>;
+			flavor = "tap-preferred";
+			tapping-term-ms = <150>;
+			quick-tap-ms = <400>;
+			bindings = <&kp>, <&key_repeat>;
+		};
 		NUMBER_KEY_HOLD_TAP(1)
 		NUMBER_KEY_HOLD_TAP(2)
 		NUMBER_KEY_HOLD_TAP(3)
@@ -2913,10 +2924,32 @@
 		COMBO(vim_column_70, &vcm N7, 31 43, COMBO_TERM_LONG)
 		COMBO(vim_column_80, &vcm N8, 32 44, COMBO_TERM_LONG)
 		COMBO(vim_column_90, &vcm N9, 33 45, COMBO_TERM_LONG)
-		COMBO(vim_column_100, &vc100m, 34 46, COMBO_TERM_LONG)	
+		COMBO(vim_column_100, &vc100m, 34 46, COMBO_TERM_LONG)
+		COMBO(left___CS, &kp       LC(LSHFT)  ,       51 52, COMBO_TERM_LONG)	
+		COMBO(left__A_S, &kp    LA(   LSHFT)  ,    50    52, COMBO_TERM_LONG)	
+		COMBO(left_G__S, &kp LG(      LSHFT)  , 49       52, COMBO_TERM_LONG)	
+		COMBO(left__AC_, &kp    LA(LCTRL   )  ,    50 51   , COMBO_TERM_LONG)	
+		COMBO(left_G_C_, &kp LG(   LCTRL   )  , 49    51   , COMBO_TERM_LONG)	
+		COMBO(left_AG__, &kp LG(LALT       )  , 49 50      , COMBO_TERM_LONG)	
+		COMBO(left_G_SC, &kp LG(  LC(LSHFT))  , 49    51 52, COMBO_TERM_LONG)	
+		COMBO(left_GA_S, &kp LG(LA(  LSHFT))  , 49 50    52, COMBO_TERM_LONG)	
+		COMBO(left__ACS, &kp   LA(LC(LSHFT))  ,    50 51 52, COMBO_TERM_LONG)	
+		COMBO(left_GAC_, &kp LG(LA(LCTRL  ))  , 49 50 51   , COMBO_TERM_LONG)	
+		COMBO(left_GACS, &kp LG(LA(LC(LSHFT))), 49 50 51 52, COMBO_TERM_LONG)	
+		COMBO(right_SC__, &kp LS(LCTRL)        , 55 56      , COMBO_TERM_LONG)	
+		COMBO(right_S_A_, &kp LS(   LALT)      , 55    57   , COMBO_TERM_LONG)	
+		COMBO(right_S__G, &kp LS(      LGUI)   , 55       58, COMBO_TERM_LONG)	
+		COMBO(right__CA_, &kp    LC(LALT)      ,    56 57   , COMBO_TERM_LONG)	
+		COMBO(right__C_G, &kp    LC(   LGUI)   ,    56    58, COMBO_TERM_LONG)	
+		COMBO(right___AG, &kp 		LA(LGUI)   ,       57 58, COMBO_TERM_LONG)	
+		COMBO(right_SC_G, &kp LS(LC(   LGUI))  , 55 56    58, COMBO_TERM_LONG)	
+		COMBO(right_S_AG, &kp LS(   LA(LGUI))  , 55    57 58, COMBO_TERM_LONG)	
+		COMBO(right_SCA_, &kp LS(LC(LALT   ))  , 55 56 57   , COMBO_TERM_LONG)	
+		COMBO(right__CAG, &kp    LC(LA(LGUI))  ,    55 57 58, COMBO_TERM_LONG)	
+		COMBO(right_SCAG, &kp LS(LC(LA(LGUI))) , 55 56 57 58, COMBO_TERM_LONG)	
 	};
 
-    keymap {
+    keymap{
         compatible = "zmk,keymap";
 
         baselayer_layer {
@@ -2927,7 +2960,7 @@
 	&bsht 0 BSLH  &SA_lht 20 Z &SX_lht 21 X &SC_lht 22 C &SD_lht 23 D &SV_lht 24 V &SK_lht 25 K &SH_lht 26 H &caht 0 COMMA &dtht 0 DOT &fsht 0 FSLH &geht 0 GRAVE 
 	&f1ht 0 F1 &htr HOME PGUP &htr END PGDN &kp LEFT &kp RIGHT &htr LSHFT TAB &htr LSHFT ENTER &kp UP &kp DOWN &lbht 0 LBKT &rbht 0 RBKT &f12ht 0 F12
 	&f2ht 0 F2 &htr LALT LG(LC(LEFT)) &htr LCTRL BSPC &f5ht 0 F5 &f8ht 0 F8 &seht 0 SPACE &htr LALT LG(LC(RIGHT)) &f11ht 0 F11
-	&f3ht 0 F3 &ltr FUNCTIONS F4 &htr LGUI DEL &f6ht 0 F6 &f7ht 0 F7 &htr LGUI &key_repeat &f9ht 0 F9 &f10ht 0 F10
+	&f3ht 0 F3 &ltr FUNCTIONS F4 &htr LGUI DEL &f6ht 0 F6 &f7ht 0 F7 &htrkr LGUI 0 &f9ht 0 F9 &f10ht 0 F10
 		>;
 	};
 
@@ -2966,17 +2999,17 @@
 	&trans &kp Z  &kp X  &kp C  &kp D  &kp V  &kp K  &kp H  &trans &trans &trans &trans
 	&trans &trans &trans &trans &trans &kp TAB &kp ENTER &trans &trans &trans &trans &trans
 	             &trans &trans &kp BSPC &trans &trans &trans &trans &trans
-				 &trans &trans &kp DEL &trans &trans &kp CAPS &trans &trans
+				 &trans &trans &kp DEL &trans &trans &trans &trans &trans
 		>;
 	};
 
 	functions_layer {
 		bindings = <
-	&trans &trans &trans &trans &trans &trans &kp PAUSE_BREAK &kp SLCK &kp C_MUTE &kp C_PLAY_PAUSE &kp C_PREV &kp C_NEXT
-	&trans &kp F12 &kp F7 &kp F8 &kp F9 &trans &kp KP_N1 &kp KP_N2 &kp KP_N3 &kp KP_N4 &kp KP_N5 &kp KP_N6
-	&trans &kp F11 &kp F4 &kp F5 &kp F6 &kp C_VOL_UP &kp KP_N7 &kp KP_N8 &kp KP_N9 &kp KP_N0 &kp KP_PLUS &kp KP_MINUS
-	&bt BT_CLR &kp F10 &kp F1 &kp F2 &kp F3 &kp C_VOL_DN &kp KP_MULTIPLY &kp KP_DIVIDE &kp KP_DOT &kp INS &kp RSHFT &kp RCTRL
-	&bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2 &bt BT_SEL 3 &bt BT_SEL 4 &trans &kp RALT &kp RGUI &kp K_APP &trans &trans &trans
+	&trans &trans &trans &trans &trans &trans &kp SA &kp SB &kp SC &kp SD &kp SE &kp SF
+	&trans &kp F12 &kp F7 &kp F8 &kp F9 &trans &kp SG &kp SH &kp SI &kp SJ &kp SK &kp SL
+	&trans &kp F11 &kp F4 &kp F5 &kp F6 &kp C_VOL_UP &kp SM &kp SN &kp SO &kp SP &kp SQ &kp SR
+	&bt BT_CLR &kp F10 &kp F1 &kp F2 &kp F3 &kp C_VOL_DN &kp SS &kp ST &kp SU &kp SV &kp SW &kp SX
+	&bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2 &bt BT_SEL 3 &bt BT_SEL 4 &trans &kp SY &kp SZ &trans &trans &trans &trans
 	             &trans &trans &trans &trans &trans &trans &trans &trans
 				 &trans &trans &trans &trans &trans &trans &trans &trans
 		>;
